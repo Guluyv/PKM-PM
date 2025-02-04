@@ -1,7 +1,7 @@
 <?php 
 $pageTitle = "Materi Edukasi";
-include '../../layouts/student/header.php';
-?>
+include __DIR__ . '/../../layouts/student/header.php'; ?>
+
 
 <div class="px-4 py-4">
     <!-- Search Bar -->
@@ -75,4 +75,4 @@ include '../../layouts/student/header.php';
     </div>
 </div>
 
-<?php include '../../layouts/student/footer.php'; ?>
+<?php include __DIR__ . '/../../layouts/student/footer.php'; ?>

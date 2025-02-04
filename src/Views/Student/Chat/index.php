@@ -1,8 +1,4 @@
-<?php 
-$pageTitle = "Chat";
-$showBackButton = true;
-include '../../layouts/student/header.php';
-?>
+<?php include __DIR__ . '/../../layouts/student/header.php'; ?>
 
 <div class="px-4 py-4">
     <!-- Chat List Section -->
@@ -10,40 +6,50 @@ include '../../layouts/student/header.php';
         <h1 class="text-xl font-bold text-gray-800 mb-4">Chat Konseling</h1>
         
         <!-- Start New Chat Button -->
-        <a href="<?= BASE_URL ?>/student/chat/room/new" 
-           class="block w-full bg-blue-600 text-white text-center py-3 rounded-lg mb-6">
+        <a href="<?= BASE_URL ?>/student/chat/room" 
+           class="block w-full bg-blue-600 text-white text-center py-3 rounded-lg mb-6 hover:bg-blue-700 transition-colors">
             Mulai Chat Baru
         </a>
 
         <!-- Chat List -->
         <div class="space-y-3">
-            <!-- Active Chat Item -->
-            <a href="<?= BASE_URL ?>/student/chat/room/1" 
-               class="block bg-white rounded-lg p-4 shadow-sm">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h3 class="font-medium text-gray-800">Konselor Anonim</h3>
-                        <p class="text-sm text-gray-500 mt-1">Terakhir aktif: 5 menit yang lalu</p>
+            <?php if (!empty($data['chats'])): ?>
+                <?php foreach ($data['chats'] as $chat): ?>
+                    <a href="<?= BASE_URL ?>/student/chat/room/<?= $chat['id'] ?>" 
+                       class="block bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-medium text-gray-800">
+                                    <?= $chat['counselor_name'] ? htmlspecialchars($chat['counselor_name']) : 'Konselor Anonim' ?>
+                                </h3>
+                                <p class="text-sm text-gray-500 mt-1">
+                                    Status: <?= $chat['status'] === 'active' ? 
+                                        '<span class="text-green-600">Aktif</span>' : 
+                                        '<span class="text-gray-600">Selesai</span>' ?>
+                                </p>
+                            </div>
+                            <?php if ($chat['status'] === 'active'): ?>
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
+                                    Aktif
+                                </span>
+                            <?php endif; ?>
+                        </div>
+                        <div class="mt-2 text-xs text-gray-500">
+                            <?= date('d M Y H:i', strtotime($chat['created_at'])) ?>
+                        </div>
+                    </a>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div class="text-center py-8">
+                    <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-comments text-gray-400 text-2xl"></i>
                     </div>
-                    <!-- Unread Badge -->
-                    <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
-                        2 pesan baru
-                    </span>
+                    <p class="text-gray-500">Belum ada chat aktif</p>
+                    <p class="text-sm text-gray-400 mt-1">Mulai konsultasi sekarang!</p>
                 </div>
-            </a>
-
-            <!-- Past Chat Item -->
-            <a href="<?= BASE_URL ?>/student/chat/room/2" 
-               class="block bg-white rounded-lg p-4 shadow-sm">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h3 class="font-medium text-gray-800">Konselor Anonim</h3>
-                        <p class="text-sm text-gray-500 mt-1">Sesi selesai - 2 hari yang lalu</p>
-                    </div>
-                </div>
-            </a>
+            <?php endif; ?>
         </div>
     </div>
 </div>
 
-<?php include '../../layouts/student/footer.php'; ?>
+<?php include __DIR__ . '/../../layouts/student/footer.php'; ?>

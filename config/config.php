@@ -1,18 +1,22 @@
 <?php
 session_start();
 
-// Base URL
-define('BASE_URL', 'http://localhost/ceritayuk');
+// Base URL configuration
+define('BASE_URL', 'http://localhost/ceritainaja');
 
-// Autoloader
+// Autoloader with debug
 spl_autoload_register(function ($class) {
     $path = str_replace('\\', '/', $class);
     $file = __DIR__ . '/../src/' . $path . '.php';
+    
+    // Debug
+    // error_log("Trying to load: " . $file);
+    
     if (file_exists($file)) {
         require_once $file;
+    } else {
+        // Debug
+        // error_log("File not found: " . $file);
+        throw new Exception("Class file not found: " . $file);
     }
 });
-
-// Error reporting
-error_reporting(E_ALL);
-ini_set('display_errors', 1);

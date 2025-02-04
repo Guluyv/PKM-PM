@@ -10,8 +10,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="CeritaYuk Admin Dashboard">
-    <title>Admin CeritaYuk - <?= $pageTitle ?? 'Dashboard' ?></title>
+    <meta name="description" content="CeritainAja Admin Dashboard">
+    <title>Admin CeritainAja - <?= $pageTitle ?? 'Dashboard' ?></title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -30,7 +30,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
                 <button @click="sidebarOpen = true" class="text-gray-500 hover:text-gray-700">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
-                <span class="text-lg font-semibold text-gray-800">CeritaYuk Admin</span>
+                <span class="text-lg font-semibold text-gray-800">CeritainAja Admin</span>
                 
                 <!-- Admin Profile -->
                 <div x-data="{ profileOpen: false }" class="relative">
@@ -131,3 +131,9 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
                                 </a>
                                 <a href="<?= BASE_URL ?>/logout" class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-50">
                                     Logout
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>

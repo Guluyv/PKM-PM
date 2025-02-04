@@ -10,8 +10,8 @@ if (!isset($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="CeritaYuk - Platform Edukasi">
-    <title>CeritaYuk - <?= $pageTitle ?? 'Platform Edukasi' ?></title>
+    <meta name="description" content="CeritainAja - Platform Edukasi">
+    <title>CeritainAja - <?= $pageTitle ?? 'Platform Edukasi' ?></title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -50,7 +50,7 @@ if (!isset($_SESSION['user_id'])) {
                     
                     <!-- Title -->
                     <h1 class="text-lg font-semibold text-gray-800">
-                        <?= $pageTitle ?? 'CeritaYuk' ?>
+                        <?= $pageTitle ?? 'CeritainAja' ?>
                     </h1>
                 </div>
 

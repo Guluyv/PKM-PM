@@ -1,15 +1,12 @@
-<?php 
-$pageTitle = "Home"; 
-include '../layouts/student/header.php';
-?>
+<?php include __DIR__ . '/../layouts/student/header.php'; ?>
 
 <div class="px-4 py-4">
     <!-- Welcome Section -->
     <div class="mb-6">
         <h1 class="text-2xl font-bold text-gray-800">
-            Hai, <?= $_SESSION['username'] ?>! 👋
+            Hai, <?= htmlspecialchars($_SESSION['username']) ?>! 👋
         </h1>
-        <p class="text-gray-600 mt-1">Selamat datang di CeritaYuk</p>
+        <p class="text-gray-600 mt-1">Selamat datang di CeritainAja</p>
     </div>
 
     <!-- Quick Actions -->
@@ -25,7 +22,7 @@ include '../layouts/student/header.php';
         </a>
 
         <!-- Materi Button -->
-        <a href="<?= BASE_URL ?>/student/education" 
+        <a href="<?= BASE_URL ?>/student/content" 
            class="bg-green-50 p-4 rounded-xl flex flex-col items-center justify-center">
             <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-2">
                 <i class="fas fa-book text-green-600 text-xl"></i>
@@ -36,94 +33,37 @@ include '../layouts/student/header.php';
     </div>
 
     <!-- Latest Content -->
+    <?php if (!empty($data['latestContent'])): ?>
     <div class="mb-6">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-lg font-semibold text-gray-800">Materi Terbaru</h2>
-            <a href="<?= BASE_URL ?>/student/education" class="text-sm text-blue-600">Lihat Semua</a>
+            <a href="<?= BASE_URL ?>/student/content" class="text-sm text-blue-600">Lihat Semua</a>
         </div>
         
         <div class="space-y-4">
-            <!-- Content Card -->
+            <?php foreach ($data['latestContent'] as $content): ?>
             <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-                <img src="<?= BASE_URL ?>/assets/images/content/article1.jpg" 
-                     alt="Artikel 1" 
+                <?php if ($content['thumbnail']): ?>
+                <img src="<?= BASE_URL ?>/public/assets/images/content/<?= htmlspecialchars($content['thumbnail']) ?>" 
+                     alt="<?= htmlspecialchars($content['title']) ?>" 
                      class="w-full h-48 object-cover">
+                <?php endif; ?>
                 <div class="p-4">
-                    <h3 class="font-semibold text-gray-800 mb-1">Memahami Kekerasan Seksual</h3>
-                    <p class="text-sm text-gray-600 mb-3">
-                        Pelajari tentang bentuk-bentuk kekerasan seksual dan cara mengidentifikasinya.
+                    <h3 class="font-semibold text-gray-800"><?= htmlspecialchars($content['title']) ?></h3>
+                    <p class="text-sm text-gray-600 mt-1">
+                        <?= htmlspecialchars($content['description']) ?>
                     </p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-xs text-gray-500">5 menit yang lalu</span>
-                        <a href="#" class="text-sm text-blue-600">Baca Selengkapnya</a>
-                    </div>
+                    <a href="<?= BASE_URL ?>/student/content/view/<?= $content['id'] ?>" 
+                       class="mt-3 inline-flex items-center text-sm text-blue-600">
+                        Baca Selengkapnya
+                        <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
                 </div>
             </div>
-
-            <!-- Content Card -->
-            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-                <div class="aspect-w-16 aspect-h-9">
-                    <div class="bg-gray-100 w-full h-48 flex items-center justify-center">
-                        <i class="fas fa-play-circle text-4xl text-gray-400"></i>
-                    </div>
-                </div>
-                <div class="p-4">
-                    <h3 class="font-semibold text-gray-800 mb-1">Video: Cara Melindungi Diri</h3>
-                    <p class="text-sm text-gray-600 mb-3">
-                        Tips praktis untuk menjaga keamanan diri dari potensi kekerasan.
-                    </p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-xs text-gray-500">1 jam yang lalu</span>
-                        <a href="#" class="text-sm text-blue-600">Tonton Video</a>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
-
-    <!-- Quiz Section -->
-    <div class="mb-6">
-        <h2 class="text-lg font-semibold text-gray-800 mb-4">Quiz Tersedia</h2>
-        <div class="bg-white rounded-xl shadow-sm p-4">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h3 class="font-semibold text-gray-800">Quiz Mingguan</h3>
-                    <p class="text-sm text-gray-600 mt-1">Uji pemahamanmu tentang materi minggu ini</p>
-                </div>
-                <a href="#" 
-                   class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium">
-                    Mulai Quiz
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Progress Section -->
-    <div>
-        <h2 class="text-lg font-semibold text-gray-800 mb-4">Progress Belajar</h2>
-        <div class="bg-white rounded-xl shadow-sm p-4">
-            <div class="space-y-4">
-                <div>
-                    <div class="flex justify-between mb-2">
-                        <span class="text-sm font-medium text-gray-700">Materi Selesai</span>
-                        <span class="text-sm text-gray-600">60%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div class="bg-blue-600 h-2 rounded-full" style="width: 60%"></div>
-                    </div>
-                </div>
-                <div>
-                    <div class="flex justify-between mb-2">
-                        <span class="text-sm font-medium text-gray-700">Quiz Selesai</span>
-                        <span class="text-sm text-gray-600">40%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div class="bg-green-600 h-2 rounded-full" style="width: 40%"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php endif; ?>
 </div>
 
-<?php include '../layouts/student/footer.php'; ?>
+<?php include __DIR__ . '/../layouts/student/footer.php'; ?>

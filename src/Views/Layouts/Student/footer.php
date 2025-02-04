@@ -2,18 +2,18 @@
     <!-- Bottom Navigation -->
     <nav class="bg-white shadow-lg fixed bottom-0 left-0 right-0 z-50">
         <div class="flex justify-around">
-            <a href="/student/home" 
+            <a href="../student/home" 
                class="flex flex-col items-center py-2 px-4 <?= $page === 'home' ? 'text-blue-600' : 'text-gray-600' ?>">
                 <i class="fas fa-home text-xl"></i>
                 <span class="text-xs mt-1">Beranda</span>
             </a>
-            <a href="/student/education" 
-               class="flex flex-col items-center py-2 px-4 <?= $page === 'education' ? 'text-blue-600' : 'text-gray-600' ?>">
+            <a href="../student/content" 
+               class="flex flex-col items-center py-2 px-4 <?= $page === 'content' ? 'text-blue-600' : 'text-gray-600' ?>">
                 <i class="fas fa-book text-xl"></i>
                 <span class="text-xs mt-1">Edukasi</span>
             </a>
-            <a href="/student/chat" 
-               class="flex flex-col items-center py-2 px-4 <?= $page === 'chat' ? 'text-blue-600' : 'text-gray-600' ?>">
+            <a href="../student/chat" 
+               class="flex flex-col items-center py-2 px-4 <?= $page === 'Chat' ? 'text-blue-600' : 'text-gray-600' ?>">
                 <i class="fas fa-comment text-xl"></i>
                 <span class="text-xs mt-1">Chat</span>
             </a>

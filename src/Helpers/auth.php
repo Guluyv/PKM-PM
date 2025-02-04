@@ -1,7 +1,15 @@
 <?php
-class Auth {
-    private $db;
+namespace Helpers;
 
+use PDO;
+use PDOException;
+use Models\User;
+use Config\Database;  // Tambahkan ini
+
+class Auth {
+    // ... rest of the code
+
+    private $db;
     public function __construct() {
         $database = new Database();
         $this->db = $database->getConnection();

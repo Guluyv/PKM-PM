@@ -1,7 +1,12 @@
 <?php
+namespace Config;
+
+use PDO;
+use PDOException;
+
 class Database {
     private $host = "localhost";
-    private $db_name = "ceritayuk";
+    private $db_name = "ceritainaja";
     private $username = "root";
     private $password = "";
     public $conn;
