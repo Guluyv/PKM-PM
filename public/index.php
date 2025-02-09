@@ -19,6 +19,7 @@ use Controllers\Student\ContentController as StudentContentController;
 use Controllers\Admin\DashboardController;
 use Controllers\Admin\UserController;
 use Controllers\Admin\ContentController as AdminContentController;
+use Controllers\API\ChatController as APIChatController;
 
 try {
     // Initialize controllers
@@ -190,14 +191,28 @@ case '/api/chat/send':
         break;
 
     // API Routes for Chat
-    case '/api/chat/send':
-        if (!$auth->isLoggedIn()) {
-            http_response_code(401);
-            echo json_encode(['error' => 'Unauthorized']);
-            exit;
-        }
-        $studentChatController->sendMessage();
-        break;
+    // API Routes for Chat
+case '/api/chat/send':
+    if (!$auth->isLoggedIn()) {
+        http_response_code(401);
+        echo json_encode(['error' => 'Unauthorized']);
+        exit;
+    }
+    $chatController = new Controllers\API\ChatController();
+    $chatController->send();
+    break;
+
+case (preg_match('/^\/api\/chat\/messages\/(\d+)$/', $path, $matches) ? true : false):
+    if (!$auth->isLoggedIn()) {
+        http_response_code(401);
+        echo json_encode(['error' => 'Unauthorized']);
+        exit;
+    }
+    $chatController = new Controllers\API\ChatController();
+    $chatController->getMessages($matches[1]);
+    break;  
+
+    
 
     
     // 404 Route

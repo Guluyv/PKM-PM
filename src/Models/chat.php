@@ -90,4 +90,23 @@ class Chat {
             return false;
         }
     }
+    public function getNewMessages($chatId, $lastId) {
+        try {
+            $query = "SELECT cm.*, u.username, u.role 
+                     FROM chat_messages cm 
+                     LEFT JOIN users u ON cm.sender_id = u.id 
+                     WHERE cm.chat_id = :chat_id 
+                     AND cm.id > :last_id
+                     ORDER BY cm.created_at ASC";
+    
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(":chat_id", $chatId);
+            $stmt->bindParam(":last_id", $lastId);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch(PDOException $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
 }
