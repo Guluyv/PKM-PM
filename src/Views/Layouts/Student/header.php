@@ -33,6 +33,18 @@ if (!isset($_SESSION['user_id'])) {
             -ms-overflow-style: none;  /* IE and Edge */
             scrollbar-width: none;  /* Firefox */
         }
+        .aspect-w-16 {
+    position: relative;
+    padding-bottom: 56.25%;
+}
+.aspect-w-16 iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+        
     </style>
 </head>
 <body class="bg-gray-50 no-scrollbar">

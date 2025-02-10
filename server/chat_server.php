@@ -1,11 +1,14 @@
 <?php
-require 'vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use Ratchet\Server\IoServer;
 use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
 use React\EventLoop\Factory;
+use Ratchet\MessageComponentInterface;
+use Ratchet\ConnectionInterface;
 use Config\Database;
+
 
 class ChatServer implements MessageComponentInterface {
     protected $clients;
